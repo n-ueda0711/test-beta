@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>{{name}}</title>
+    </head>
+
+    <a href="/logout">ログアウトする</a>
+
+    <body>
+        <h1>{{name}}のシロクマ</h1>
+
+        <img src="/static/images/polarbear.jpg" alt="シロクマ">
+
+        <form action="/add" method="post">
+            <input type="text" name="title" placeholder="title">
+            <input type="text" name="body" placeholder="body">
+            <input type="submit" value="Add">
+        </form>
+
+        <form action="/update" method="post" id="update">
+            <p>※ラジオボタンで変更する内容を選択して押下</p>
+            <input type="text" name="title" placeholder="title">
+            <input type="text" name="body" placeholder="body">
+            <input type="submit" value="update">
+        </form>
+
+        <form action="/delete" method="post" id="delete">
+            <p>※削除する内容をチェックして押下</p>
+            <input type="submit" value="Delete Selected All Onegai">
+        </form>
+
+        {% for onegai in all_onegai %}
+        <div>
+            <input type="radio" name="update" form="update" value={{onegai.id}}>
+            <input type="checkbox" name="delete" form="delete" value={{onegai.id}}>
+            {{onegai.title}}：{{onegai.body}}（{{onegai.date}}）
+        </div>
+        {% endfor %}
+    </body>
+</html>
